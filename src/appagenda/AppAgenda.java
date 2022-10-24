@@ -4,6 +4,10 @@
  */
 package appagenda;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 /**
  *
  * @author usu2dam
@@ -14,7 +18,8 @@ public class AppAgenda {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("AppAgendaPU");
+        EntityManager em=emf.createEntityManager();
     }
     
 }
