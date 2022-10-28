@@ -5,10 +5,11 @@
     <class>entidades.Persona</class>
     <class>entidades.Provincia</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby:C:\Users\usu2dam\Documents\NetBeansProjects\AppAgenda\BDAgenda;create=true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:BDAgenda;create=true"/>
       <property name="javax.persistence.jdbc.user" value="APP"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
       <property name="javax.persistence.jdbc.password" value="APP"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
