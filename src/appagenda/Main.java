@@ -34,7 +34,7 @@ public class Main extends Application {
         
         AgendaViewController agendaViewController = (AgendaViewController)fxmlLoader.getController();
         agendaViewController.setEntityManager(em);
-
+        agendaViewController.cargarTodasPersonas();
 
         
         

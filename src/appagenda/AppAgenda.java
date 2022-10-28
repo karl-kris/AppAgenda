@@ -23,7 +23,7 @@ public class AppAgenda {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppAgendaPU");
+        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppAgendaPU");
         EntityManager em = emf.createEntityManager();
         
         
@@ -80,7 +80,7 @@ public class AppAgenda {
         em.remove(provinciaId15);
         }else{
         System.out.println("No hay ninguna provincia con ID=15");
-        }*/
+        }
         
         // Volcado a la base de datos
         em.getTransaction().commit();
@@ -95,7 +95,7 @@ public class AppAgenda {
         try{
             DriverManager.getConnection("jdbc:derby:BDAgenda;shutdown=true");
         } catch (SQLException ex){
-        }
+        }*/
 
     }
     
