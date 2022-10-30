@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appagenda.DatosViewController">
+<AnchorPane id="AnchorPane" fx:id="rootPersonaDetalleView" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appagenda.PersonaDetalleViewController">
    <children>
       <GridPane hgap="10.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
         <columnConstraints>
@@ -51,30 +51,30 @@
             <Label text="Estado Civil:" GridPane.rowIndex="6" />
             <Label text="Salario:" GridPane.rowIndex="7" />
             <Label text="Jubilación:" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Guardar" GridPane.columnIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <CheckBox mnemonicParsing="false" text="Jubilado" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="rowNombre" GridPane.columnIndex="1" />
+            <TextField fx:id="rowApellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="rowTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="rowEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="rowHijos" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onActionButtonCancelar" prefHeight="25.0" prefWidth="69.0" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionButtonGuadar" prefHeight="25.0" prefWidth="69.0" text="Guardar" GridPane.columnIndex="2" />
+            <ComboBox fx:id="rowProvincia" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <CheckBox fx:id="rowJubilacion" mnemonicParsing="false" text="Jubilado" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <HBox prefHeight="10.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Soltero/a" />
-                  <RadioButton mnemonicParsing="false" text="Casado/a" />
-                  <RadioButton mnemonicParsing="false" text="Viudo/a" />
+                  <RadioButton fx:id="soltero" mnemonicParsing="false" text="Soltero/a" />
+                  <RadioButton fx:id="casado" mnemonicParsing="false" text="Casado/a" />
+                  <RadioButton fx:id="viudo" mnemonicParsing="false" text="Viudo/a" />
                </children>
             </HBox>
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="rowFecha" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Provincia:" GridPane.rowIndex="9" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="rowSalario" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Foto:" GridPane.rowIndex="11" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <children>
-                  <ImageView fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" text="Examinar:" />
+                  <ImageView fx:id="image" fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnExaminar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionButtonExaminar" text="Examinar:" />
                </children>
             </HBox>
          </children>
