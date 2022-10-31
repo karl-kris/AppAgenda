@@ -56,6 +56,7 @@ import javax.persistence.RollbackException;
  */
 public class PersonaDetalleViewController implements Initializable {
 
+    // Cargamos todos los IDs asignados en el SceneBuilder al controller
     @FXML
     private TextField rowNombre;
     @FXML
@@ -82,11 +83,10 @@ public class PersonaDetalleViewController implements Initializable {
     private TextField rowSalario;
     @FXML
     private ImageView imageViewFoto;
-    
-    private Pane rootAgendaView;
     @FXML
     private AnchorPane rootPersonaDetalleView;
     
+    private Pane rootAgendaView;
     private TableView tableViewPrevio;
     private Persona persona;
     private EntityManager entityManager;
