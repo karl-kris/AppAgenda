@@ -53,32 +53,26 @@ public class AgendaViewController implements Initializable {
     @FXML
     private TableColumn<Persona, String> columnProvincia;
     @FXML
-    private Label nombre;
-    @FXML
-    private Label apellidos;
-    @FXML
     private TextField introNombre;
     @FXML
     private TextField introApellidos;
-    @FXML
-    private Button guardar;
     
     private Persona personaSeleccionada;
     @FXML
     private AnchorPane rootAgendaView;
     
-
+    // Set entity manager
     public void setEntityManager(EntityManager entityManager){
         this.entityManager=entityManager;
     }
     
+    // Cargar las personas en la tabla
     public void cargarTodasPersonas(){
-        Query queryPersonaFindAll=
-        entityManager.createNamedQuery("Persona.findAll");
+        Query queryPersonaFindAll=entityManager.createNamedQuery("Persona.findAll");
         List<Persona> listPersona = queryPersonaFindAll.getResultList();
-        tableViewAgenda.setItems(FXCollections.observableArrayList(listPersona)
-        );
+        tableViewAgenda.setItems(FXCollections.observableArrayList(listPersona));
     }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,6 +100,7 @@ public class AgendaViewController implements Initializable {
         });
     }    
 
+    // Guardar datos simples (nombre, apellidos) cambiados en la misma vista
     @FXML
     private void onActionButtonGuardar(ActionEvent event) {
         if (personaSeleccionada != null){
@@ -125,79 +120,86 @@ public class AgendaViewController implements Initializable {
         }
     }
 
+    // Botón de cambio de vista para crear nuevo contacto
     @FXML
     private void onActionButtonNuevo(ActionEvent event) {
         try{
-        // Cargar la vista de detalle
-        FXMLLoader fxmlLoader=new
-        FXMLLoader(getClass().getResource("PersonaDetalleView.fxml"));
-        Parent rootDetalleView=fxmlLoader.load();
-        PersonaDetalleViewController personaDetalleViewController = (PersonaDetalleViewController) fxmlLoader.getController();
-        personaDetalleViewController.setRootAgendaView(rootAgendaView);
-        personaDetalleViewController.setTableViewPrevio(tableViewAgenda);
-        personaSeleccionada = new Persona();
-        personaDetalleViewController.setPersona(entityManager,personaSeleccionada,true);
-        
-        personaDetalleViewController.mostrarDatos();
-        // Ocultar la vista de la lista
-        rootAgendaView.setVisible(false);
-        //Añadir la vista detalle al StackPane principal para que se muestre
-        StackPane rootMain =
-        (StackPane) rootAgendaView.getScene().getRoot();
-        rootMain.getChildren().add(rootDetalleView);
+            // Cargar la vista de detalle
+            FXMLLoader fxmlLoader=new
+            FXMLLoader(getClass().getResource("PersonaDetalleView.fxml"));
+            Parent rootDetalleView=fxmlLoader.load();
+            PersonaDetalleViewController personaDetalleViewController = (PersonaDetalleViewController) fxmlLoader.getController();
+            personaDetalleViewController.setRootAgendaView(rootAgendaView);
+            personaDetalleViewController.setTableViewPrevio(tableViewAgenda);
+            personaSeleccionada = new Persona();
+            personaDetalleViewController.setPersona(entityManager,personaSeleccionada,true);
+
+            personaDetalleViewController.mostrarDatos();
+            // Ocultar la vista de la lista
+            rootAgendaView.setVisible(false);
+            //Añadir la vista detalle al StackPane principal para que se muestre
+            StackPane rootMain =
+            (StackPane) rootAgendaView.getScene().getRoot();
+            rootMain.getChildren().add(rootDetalleView);
         } catch (IOException ex){
-        Logger.getLogger(AgendaViewController.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(AgendaViewController.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
 
+    // Botón de editar perosna de la tabla
     @FXML
     private void onActionButtonEditar(ActionEvent event) {
-        try{
-        // Cargar la vista de detalle
-        FXMLLoader fxmlLoader=new
-        FXMLLoader(getClass().getResource("PersonaDetalleView.fxml"));
-        Parent rootDetalleView=fxmlLoader.load();
-        PersonaDetalleViewController personaDetalleViewController = (PersonaDetalleViewController) fxmlLoader.getController();
-        personaDetalleViewController.setRootAgendaView(rootAgendaView);
-        personaDetalleViewController.setTableViewPrevio(tableViewAgenda);
-        personaDetalleViewController.setPersona(entityManager,personaSeleccionada,false);
-        
-        personaDetalleViewController.mostrarDatos();
-        // Ocultar la vista de la lista
-        rootAgendaView.setVisible(false);
-        //Añadir la vista detalle al StackPane principal para que se muestre
-        StackPane rootMain =
-        (StackPane) rootAgendaView.getScene().getRoot();
-        rootMain.getChildren().add(rootDetalleView);
-        } catch (IOException ex){
-        Logger.getLogger(AgendaViewController.class.getName()).log(Level.SEVERE,null,ex);
+        if (personaSeleccionada != null){
+            try{
+                // Cargar la vista de detalle
+                FXMLLoader fxmlLoader=new
+                FXMLLoader(getClass().getResource("PersonaDetalleView.fxml"));
+                Parent rootDetalleView=fxmlLoader.load();
+                PersonaDetalleViewController personaDetalleViewController = (PersonaDetalleViewController) fxmlLoader.getController();
+                personaDetalleViewController.setRootAgendaView(rootAgendaView);
+                personaDetalleViewController.setTableViewPrevio(tableViewAgenda);
+                personaDetalleViewController.setPersona(entityManager,personaSeleccionada,false);
+
+                personaDetalleViewController.mostrarDatos();
+                // Ocultar la vista de la lista
+                rootAgendaView.setVisible(false);
+                //Añadir la vista detalle al StackPane principal para que se muestre
+                StackPane rootMain =
+                (StackPane) rootAgendaView.getScene().getRoot();
+                rootMain.getChildren().add(rootDetalleView);
+            } catch (IOException ex){
+                Logger.getLogger(AgendaViewController.class.getName()).log(Level.SEVERE,null,ex);
+            }
         }
     }
 
+    // Botón suprimir dato de la tabla
     @FXML
     private void onActionButtonSuprimir(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar");
-        alert.setHeaderText("¿Desea suprimir el siguiente registro?");
-        alert.setContentText(personaSeleccionada.getNombre() + " "
-        + personaSeleccionada.getApellidos());
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-        // Acciones a realizar si el usuario acepta
-        entityManager.getTransaction().begin();
-        entityManager.merge(personaSeleccionada);
-        entityManager.remove(personaSeleccionada);
-        entityManager.getTransaction().commit();
-        tableViewAgenda.getItems().remove(personaSeleccionada);
-        tableViewAgenda.getFocusModel().focus(null);
-        tableViewAgenda.requestFocus();
-        } else {
-        // Acciones a realizar si el usuario cancela
-        int numFilaSeleccionada = tableViewAgenda.getSelectionModel().getSelectedIndex();
-        tableViewAgenda.getItems().set(numFilaSeleccionada,personaSeleccionada);
-        TablePosition pos = new TablePosition(tableViewAgenda,numFilaSeleccionada,null);
-        tableViewAgenda.getFocusModel().focus(pos);
-        tableViewAgenda.requestFocus();
+        if (personaSeleccionada != null){
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar");
+            alert.setHeaderText("¿Desea suprimir el siguiente registro?");
+            alert.setContentText(personaSeleccionada.getNombre() + " "
+            + personaSeleccionada.getApellidos());
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // Acciones a realizar si el usuario acepta
+                entityManager.getTransaction().begin();
+                entityManager.merge(personaSeleccionada);
+                entityManager.remove(personaSeleccionada);
+                entityManager.getTransaction().commit();
+                tableViewAgenda.getItems().remove(personaSeleccionada);
+                tableViewAgenda.getFocusModel().focus(null);
+                tableViewAgenda.requestFocus();
+            } else {
+                // Acciones a realizar si el usuario cancela
+                int numFilaSeleccionada = tableViewAgenda.getSelectionModel().getSelectedIndex();
+                tableViewAgenda.getItems().set(numFilaSeleccionada,personaSeleccionada);
+                TablePosition pos = new TablePosition(tableViewAgenda,numFilaSeleccionada,null);
+                tableViewAgenda.getFocusModel().focus(pos);
+                tableViewAgenda.requestFocus();
+            }
         }
     }
     

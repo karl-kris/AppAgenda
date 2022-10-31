@@ -57,7 +57,7 @@
             <TextField fx:id="rowEmail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="rowHijos" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onActionButtonCancelar" prefHeight="25.0" prefWidth="69.0" text="Cancelar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionButtonGuadar" prefHeight="25.0" prefWidth="69.0" text="Guardar" GridPane.columnIndex="2" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionButtonGuardar" prefHeight="25.0" prefWidth="69.0" text="Guardar" GridPane.columnIndex="2" />
             <ComboBox fx:id="rowProvincia" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <CheckBox fx:id="rowJubilacion" mnemonicParsing="false" text="Jubilado" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <HBox prefHeight="10.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -73,8 +73,13 @@
             <Label text="Foto:" GridPane.rowIndex="11" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <children>
-                  <ImageView fx:id="image" fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="btnExaminar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionButtonExaminar" text="Examinar:" />
+                  <ImageView fx:id="imageViewFoto" fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnExaminar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onActionButtonExaminar" text="Examinar" />
+                  <Button mnemonicParsing="false" onAction="#onActionButtonSuprimir" text="Suprimir">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>
